@@ -10,7 +10,8 @@ class RubyGrid:
             rows = int(rows)
             cols = int(cols)
         except:
-            raise Exception('RubyGrid.create_grid.malformed_input_error')
+            raise Exception(
+                f'RubyGrid.create_grid.malformed_input_error: Recieved {gridsize}')
         self.rows = rows
         self.cols = cols
 
@@ -19,7 +20,8 @@ class RubyGrid:
             *position, direction = combined_input.split(' ')
             position = [int(i) for i in position]
         except:
-            raise Exception('RubyGrid.place_robot.malformed_input_error')
+            raise Exception(
+                f'RubyGrid.place_robot.malformed_input_error: Recieved {combined_input}')
         self.robot = RubyRobot(direction)
         self.robot_position = position
 
@@ -48,7 +50,8 @@ class RubyGrid:
         elif action == 'turn':
             pass
         else:
-            raise Exception('RubyGrid.perform_action.unkown_action_error')
+            raise Exception(
+                f'RubyGrid.perform_action.unkown_action_error: Recieved {action}')
 
     def print_state(self):
         print(

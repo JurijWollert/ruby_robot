@@ -24,7 +24,7 @@ class TestGrid:
 class TestRuby:
     def test_ruby_robot(self):
         robot = RubyRobot('E')
-        assert robot.getter_direction() == 'E'  # real getter function?
+        assert robot.direction == 'E'  # real getter function?
 
     def test_move(self):
         grid = RubyGrid('6 8')
@@ -35,7 +35,7 @@ class TestRuby:
     def test_turn(self):
         robot = RubyRobot('W')
         robot.evaluate_action('R')
-        assert robot.getter_direction() == 'N'  # real getter function?
+        assert robot.direction == 'N'  # real getter function?
 
     def test_error_move(self):
         pass
