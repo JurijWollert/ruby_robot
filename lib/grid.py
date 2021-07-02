@@ -24,6 +24,7 @@ class RubyGrid:
                 f'RubyGrid.place_robot.malformed_input_error: Recieved {combined_input}')
         self.robot = RubyRobot(direction)
         self.robot_position = position
+        self._verify_position()
 
     def move(self, direction): ## check if robot is placed?
         if direction == 'N':
@@ -37,8 +38,8 @@ class RubyGrid:
         self._verify_position()
 
     def _verify_position(self):
-        x_valid = 0 <= self.robot_position[1] < self.rows
-        y_valid = 0 <= self.robot_position[0] < self.cols
+        x_valid = 0 <= self.robot_position[1] <= self.rows
+        y_valid = 0 <= self.robot_position[0] <= self.cols
 
         if not x_valid & y_valid:
             raise Exception('RubyGrid.verify_position.out_of_bounds_error')
@@ -46,9 +47,9 @@ class RubyGrid:
     def perform_action(self, activity: str):
         action = self.robot.evaluate_action(activity)
         if action == 'move':
-            self.move(self.robot.getter_direction())
+            self.move(self.robot.direction)
         elif action == 'turn':
-            pass
+            self.robot.turn(activity)
         else:
             raise Exception(
                 f'RubyGrid.perform_action.unkown_action_error: Recieved {action}')
@@ -57,5 +58,5 @@ class RubyGrid:
         print(
             self.robot_position[0],
             self.robot_position[1],
-            self.robot.getter_direction()
+            self.robot.direction
         )

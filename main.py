@@ -1,5 +1,17 @@
+import argparse
 from lib.grid import RubyGrid
-with open('input/robot_actions.txt', 'r') as instructions:
+
+parser = argparse.ArgumentParser(description='Let loose the Ruby Robot!')
+parser.add_argument(
+    "input",
+    type=str,
+    help="Provide path to input file here, necessarily as the first input."
+)
+
+args = parser.parse_args()
+path = args.input
+
+with open(path, 'r') as instructions:
     lines = instructions.read().splitlines()
 
 gridsize = lines.pop(0)

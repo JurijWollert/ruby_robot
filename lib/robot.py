@@ -4,7 +4,11 @@ class RubyRobot:
         'L': -1
     }
 
-    MOVE_ACTIONS = ['M']
+    ACTIONS = {
+        'R': 'turn',
+        'L': 'turn',
+        'M': 'move'
+    }
 
     DIRECTIONS = ['N', 'E', 'S', 'W']
 
@@ -16,12 +20,9 @@ class RubyRobot:
         return self.DIRECTIONS[self.__direction]
 
     def evaluate_action(self, activity: str) -> str:
-        if activity in self.TURN_ACTIONS.keys():
-            self.turn(activity)
-            return 'turn'
-        elif activity in self.MOVE_ACTIONS:
-            return 'move'
-        else:
+        try:
+            return self.ACTIONS[activity]
+        except:
             raise Exception(
                 f"RubyRobot.evaluate_action.unknown_action_error: Recieved {activity}"
             )
@@ -38,5 +39,5 @@ class RubyRobot:
             self.__direction = self.DIRECTIONS.index(direction)
         except:
             raise Exception(
-                f"RubyRobot.set_directions.unknown_direction_error:  Recieved {direction}"
+                f"RubyRobot.set_directions.unknown_direction_error: Recieved {direction}"
             )

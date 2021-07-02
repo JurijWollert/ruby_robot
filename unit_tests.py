@@ -14,28 +14,33 @@ class TestGrid:
         with pytest.raises(Exception):
             grid.move('N')
 
-    def test_error_grid(self):
-        pass
+    def test_move(self):
+        grid = RubyGrid('6 8')
+        grid.robot_position = [2, 2]
+        grid.move('N')
+        grid.move('W')
+        assert grid.robot_position == [1, 3]
+
+    def test_error_move(self):
+        grid = RubyGrid('5 5')
+        grid.robot_position = [3, 5]
+        with pytest.raises(Exception):
+            grid.move('N')
 
     def test_error_placing(self):
-        pass
+        grid = RubyGrid('4 4')
+        with pytest.raises(Exception):
+            grid.place_robot('5 4 E')
 
 
 class TestRuby:
     def test_ruby_robot(self):
         robot = RubyRobot('E')
-        assert robot.direction == 'E'  # real getter function?
-
-    def test_move(self):
-        grid = RubyGrid('6 8')
-        grid.robot_position = [2, 2]
-        grid.move('N')
-        assert grid.robot_position == [2, 3]
+        assert robot.direction == 'E'
 
     def test_turn(self):
         robot = RubyRobot('W')
-        robot.evaluate_action('R')
-        assert robot.direction == 'N'  # real getter function?
-
-    def test_error_move(self):
-        pass
+        robot.turn('R')
+        robot.turn('R')
+        robot.turn('R')
+        assert robot.direction == 'S'
